@@ -81,7 +81,11 @@ class ProfileView(TemplateView):
         
         events = Event.objects.filter(published=True, author=user, date_time__gt=timezone.now()).order_by('date_time')
         
-        friend_list = Profile.objects.get(user = user).friends.all().exclude(user = request.user)[:10]
+        friend_list = Profile.objects.get(user = user).friends.all()
+        
+        if request.user!=user:
+            friend_list.exclude(user = request.user)[:10]
+            
         list = [item.user for item in friend_list]
         context = {
             'selected_user': user,
