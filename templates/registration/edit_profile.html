@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="content">
+    <div class="container" style="display: flex; justify-content: center;">
+        <div style="display: inline-block; width: 400px;">
+            
+            <div style="display: flex; justify-content: center;">
+                <h2>Edit profile</h2>
+            </div>
+            <form method="post" class="post-form" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div style="display: flex; justify-content: center;">
+                    <input type="submit" class="button" value="Сохранить">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    jQuery('#id_birth_date').datetimepicker({
+        format:'Y-m-d',
+        timepicker:false
+    });
+</script>
+{% endblock %}

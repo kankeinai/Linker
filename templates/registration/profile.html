@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static%}
+<div class="content">
+    <div class="container">
+        <div style="display: flex; justify-content:center; width: 100%;">
+            <div class="mobile">
+                {% if selected_user.profile.avatar.name %}
+                    <img src="{{ selected_user.profile.avatar.url }}" class="avatar-img" width="100%">
+                {% else %}
+                    <img src="{% static 'img/user.png' %}" class="avatar-img" width="100%">
+                {% endif %}
+            </div>
+        </div>
+        <div class="user_content">
+            <div class="user_avatar">
+                {% if selected_user.profile.avatar.name %}
+                    <img src="{{ selected_user.profile.avatar.url }}" class="avatar-img" width="100%">
+                {% else %}
+                    <img src="{% static 'img/user.png' %}" class="avatar-img" width="100%">
+                {% endif %}
+                
+                {% if selected_user.id != user.id %}
+                    <div style="display:flex;justify-content: center;">
+                            {% if friend%}
+                            <a id="unfollow" class="button" href="{%url 'profile'%}?user={{selected_user.username}}&friend=delete" style="width: 100px; text-align: center; margin-top: 10px;">Unfollow</a>
+                            {% else %}
+                            <a id="follow" class="button" href="{%url 'profile'%}?user={{selected_user.username}}&friend=add" style="width: 100px; text-align: center; margin-top: 10px;">Follow</a>
+                            {%endif%}
+                    </div>
+                {% endif %}  
+                <br>
+            </div>
+            <div class="user_profile" >
+                <div style="display: flex; justify-content: space-between;">
+                    
+                    
+                    
+                        <h2 style="padding-left:20px; color: rgb(55, 96, 110)">{{selected_user.get_full_name }} </h2>
+                        
+                    
+                    {% if selected_user.id == user.id %}
+                        <a href="{% url 'edit_profile' %}" class="edit_button"><img src="{%static 'img/settings.png'%}" width="30px" title="Edit profile"></a>
+                    {% endif %}
+    
+                </div>
+                <div style="padding-left:20px; color:gray; font-size:13px">{% if selected_user.profile.is_active%}Online{%else%}Offline{%endif%}</div>
+               
+                    
+                
+            
+                <table cellpadding="40" cellspacing="20" width="100%">
+                    <tr>
+                        <td><b>Username:</b></td>
+                        <td>{{ selected_user.username }}</td>
+                    </tr>
+                    {% if selected_user.id == user.id %}
+                    <tr>
+
+                        <td><b>Email:</b></td>
+                        <td>{{ selected_user.email }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>City:</b></td>
+                        <td>{{selected_user.profile.city }}</td>
+                    </tr>
+                    {%endif%}
+                    <tr>
+                    
+                        <td><b>Birth date:</b></td>
+                        <td>{{selected_user.profile.birth_date|date:"d M Y"}}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Gender:</b></td>
+                        <td>{{ selected_user.profile.get_gender_display }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Bio:</b></td>
+                        <td>{{ selected_user.profile.bio|linebreaks }}</td>
+                        
+                    </tr>
+                    {% if selected_user.id == user.id %}
+                    <tr>
+                        <td><b>Balance:</b></td>
+                        <td>{{ selected_user.profile.balance}} linkers</td>
+                    </tr>
+                    {%endif%}
+                </table>
+                
+            </div>
+            
+        </div>   
+        {%include 'friends_list.html'%}
+        {%include 'event_list.html'%}
+        
+    </div>
+</div>
+{%include 'create_event.html'%}
+{% endblock %}

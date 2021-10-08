@@ -1,0 +1,56 @@
+{% load static %}
+<header class="header">
+    <div class="container">
+        <div class="header_body">
+            <a href="{% url 'Home'%}" class="logo">Linker</a>
+            <div class="header_burger"> <span></span></div>
+            </nav>  
+            <nav class="header_menu">
+                <ul class="header_list">
+                    {% if user.is_authenticated %}
+                        <li class="user_icon">   
+                            <div class="user_info">
+                                {% if user.profile.avatar.name %}
+                                <p style="text-align: center;"><a href="{% url 'profile'%}"><img src="{{user.profile.avatar.url }}" style="border-radius: 50%;" width="150px" title="Go to account page" class="avatar-img img-thumbnail"></p></a>
+                                {% else %}
+                                <p style="text-align: center;"><a href="{% url 'profile'%}"><img src="{% static 'img/user.png' %}" style="border-radius: 50%;" width="150px" title="Go to account page" class="avatar-img img-thumbnail"></p></a>
+                                {% endif %}
+                                <p style="text-align: center;">{{user.get_full_name}}</p>
+                                <p style="text-align: center;">Balance: 
+                                    {% if user.profile.balance %}
+                                        {{user.profile.balance}} 
+                                    {% else %}
+                                    0
+                                    {%endif%}
+                                coins</p>
+                                <p style="text-align: center; padding-top: 20px; padding-bottom: 10px;"><a href="{% url 'logout'%}" class="button">Log out</a></p>
+                            </div>
+                        </li>
+                        
+                    {%endif%}
+                    {%for item in menu%}
+                        <li><a href="{% url item %}" class="header_link">{{item}}</a></li>
+                    {% endfor %}   
+
+                    {% if user.is_authenticated %}
+                        <li class="logout_menu"><a href="{% url 'logout'%}" class="button">Log out</a></li>   
+                    {% else %}
+                        <div style="display:flex; justify-content: center;">
+                            <li style="border: 1px solid transparent;"><a href="{% url 'login'%}" class="button" >Log in</a></li>
+                            <li style="padding-left: 10px; border: 1px solid transparent;"><a href="{% url 'registration'%}" class="button">Registration</a></li>
+                        </div>
+                    {% endif %}
+                    
+                </ul>
+            </nav>
+            {% if user.is_authenticated %} 
+                {% if user.profile.avatar.name %}
+                    <a class="user_icon_mini" href="{% url 'profile'%}"><img src="{{user.profile.avatar.url }}"  class="icon" title="Go to account page"></a>
+                {% else %}
+                    <a class="user_icon_mini" href="{% url 'profile'%}"><img src="{% static 'img/user.png' %}" class="icon" title="Go to account page"></a>
+                {% endif %}
+
+            {% endif %}
+        </div>
+    </div>
+</header>

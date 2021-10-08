@@ -1,0 +1,17 @@
+
+<div class="people_content" style="width: 100%; ">
+    <h1 style="text-align: center; margin-top: 30px; margin-bottom: 30px;">Possible soulmates</h1>
+    <div style="display: flex; justify-content: center; margin-top: 30px;">
+        {% for person in people%}
+                <div style="width: 16%;">
+                    <a href="accounts/profile/?user={{person.username}}" style="display: flex; justify-content: center;" title="Go to {{person.username}} profile"><img src="{{person.profile.avatar.url}}" class="avatar-img" width="90%"></a>                    
+                    <a href="accounts/profile/?user={{person.username}}" style="display: flex; justify-content: center; text-decoration: none;
+                    color:#000;"><p style="text-align: center;">{{person.username}}</p></a>  
+                    
+                </div>
+        {%empty%}
+                <p>No users yet :(</p>
+        {% endfor %}
+        
+    </div>
+</div>

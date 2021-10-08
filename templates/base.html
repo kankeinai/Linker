@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{%static '/datetimepicker-master/jquery.datetimepicker.css'%}">
+    <script src="{%static '/datetimepicker-master/jquery.js'%}"></script>
+    <script src="{%static '/datetimepicker-master/build/jquery.datetimepicker.full.min.js'%}"></script>
+
+    <link rel="stylesheet" href="{%static '/source/stylesheets/html-input-range.css'%}">
+
+<script src="{%static '/source/javascript/html-input-range.js'%}"></script>
+
+
+
+
+
+    
+    
+
+
+    
+   
+</head>
+<body class="">
+    <div class="wrapper">
+        {% include 'menu.html' %}
+        
+        {% include 'messages.html' %}
+        {% block content%}
+        {% endblock content%} 
+    </div>
+</body>
+
+
+
+
+</html>

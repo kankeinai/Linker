@@ -1,0 +1,23 @@
+{% load static%}
+<div class="event_cr">
+    <div class="create_event_panel">
+            <h2 style="margin-left: 15%;">Create event</h2>
+            <div class="button add_event">Close</div>
+    </div>
+    <div class="create_event_form">
+        <div style="width: 70%;">
+            <form method="post" class="post-form" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div style="display: flex; justify-content: center;">
+                    <input type="submit" class="button" value="Сохранить">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    jQuery('#id_date_time').datetimepicker({
+        format:'Y-m-d H:i',
+    });
+</script>

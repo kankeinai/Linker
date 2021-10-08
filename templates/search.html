@@ -1,0 +1,33 @@
+<div class="search" style="margin-top:60px; margin-right: 20px;">
+    <h1 style="text-align:center; margin-bottom: 30px;">Search events</h2>
+    <form method="get" class="post-form" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="categories_form" style="align-items: center; display: flex;">
+                {% for field in form.visible_fields|slice:"0:2" %}
+                    <label class="mylabel">{{field.label}}: </label>
+                    <div style="margin-left: 10px; margin-right: 10px">{{field}}</div>
+                {% endfor %}
+        </div>
+        <div class="categories_form" style="align-items: center; display: flex;">
+            
+                <label>Number of people:</label>
+                {% for field in form.visible_fields|slice:"2:4" %}
+                <div style="margin-left: 10px; margin-right: 10px">{{field}}</div>
+                {% endfor %}
+        </div>
+        <div class="categories_form" style="display: flex; align-items: center; width: 100%;">
+            {% for field in form.visible_fields|slice:"4:5" %}
+                <div style="width:90%">{{field}}</div>
+            {% endfor %}
+
+            <input style="margin-left:10px" type="submit" class="button" value="Search">
+        </div>      
+    </form>
+</div>
+<script>
+    jQuery('#id_date').datetimepicker({
+        format:"Y-m-d",
+        timepicker:false,
+    });
+
+</script>

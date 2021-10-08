@@ -1,0 +1,35 @@
+{% load static%}
+
+<div style="display: flex; justify-content: space-between;">
+    <h2>Created events</h2>
+    {% if selected_user.id == user.id %}
+        <img src="{%static 'img/plus.png'%}" class="add_event" width="30px">
+    {%endif%}
+</div>
+<div style="margin-top: 30px;">
+    {% for event in events%}
+        <div class="user_event_list">
+            <div class="user_event">
+                <p class="event-title">{{event.title}}</p>
+                <p class="event-tags">tags: {{event.tags}}</p>
+                <p class="event-desc">{{event.short_desc}}</p>
+                <p class="event-date">{{event.date_time}}</p>
+            </div>
+            <div style="float:right; margin-top: 20px;">
+                <a class="button" style="margin-top:10px; text-align: center;">Open</a>
+            </div>
+        </div>
+    {%empty%}
+    
+    <p style="margin-top: 20px; text-align: center;">No events here yet :(</p>
+    {% endfor%}
+</div>
+<script>
+    $(document).ready(function(){
+         $('.add_event').click(function(event){
+             $('.event_cr').toggleClass('active');
+             $('body').toggleClass('lock');
+             $('body').toggleClass('active');
+         });
+    }); 
+ </script>

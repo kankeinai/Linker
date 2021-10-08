@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% block content%}
+
+
+<div class="content">
+  
+  <div class="container">
+  
+    <div class="content_text"> 
+      {% include 'friends.html'%}
+      {% include 'search.html' %}
+      
+      <p style="border-bottom: 1px solid rgba(236, 236, 236, 0.8); padding-bottom: 10px;">Total number of events: {{counter}}</p>
+      {% for event in events%}
+        <div class="event-entry">
+            <p class="event-title">{{event.title}}</p>
+            <p class="event-tags">tags: {{event.tags}}</p>
+            <p class="event-desc">{{event.short_desc}}</p>
+            <p class="event-date">{{event.date_time}}</p>
+            <a id={{event.pk}} class="more">More</a>
+        </div>
+        <div id="{{event.pk}}" class="event-detail">
+          <div class="detail-header">
+            <p class="event-title detail">{{event.title}}</p>
+            <span id={{event.pk}} class="closer"><p class="event-closer">Close</p></span>
+          </div>
+          <p class="event-tags">{{event.tags}}</p>
+          <div class="event-row">
+            <p>Category: {{event.category}}</p>
+            <p>Number of people: {{event.num_people}}</p>
+          </div>
+          <p class="event-desc detail">{{event.details}}</p>
+          <p class="event-date">{{event.date_time}}</p>
+          <p>Creator: <a href="accounts/profile/?user={{event.author.username}}" style="text-decoration: none;">{{event.author}}</a></p>
+      </div>
+      {% empty%}
+      <p style="margin-top: 20px; margin-left: 40px">No events here yet :(</p>
+      {% endfor %} 
+    </div>
+   
+  </div>
+</div>
+
+
+
+{% include "pagination.html" with page=events %}
+{% endblock content%}
