@@ -10,8 +10,8 @@
                     {% if user.is_authenticated %}
                         <li class="user_icon">   
                             <div class="user_info">
-                                {% if user.profile.avatar.name %}
-                                <p style="text-align: center;"><a href="{% url 'profile'%}"><img src="{{user.profile.avatar.url }}" style="border-radius: 50%;" width="150px" title="Go to account page" class="avatar-img img-thumbnail"></p></a>
+                                {% if user.profile.avatar_mini.name %}
+                                <p style="text-align: center;"><a href="{% url 'profile'%}"><img src="{{user.profile.avatar_mini.url }}" style="border-radius: 50%;" width="150px" title="Go to account page" class="avatar-img img-thumbnail"></p></a>
                                 {% else %}
                                 <p style="text-align: center;"><a href="{% url 'profile'%}"><img src="{% static 'img/user.png' %}" style="border-radius: 50%;" width="150px" title="Go to account page" class="avatar-img img-thumbnail"></p></a>
                                 {% endif %}
@@ -44,8 +44,8 @@
                 </ul>
             </nav>
             {% if user.is_authenticated %} 
-                {% if user.profile.avatar.name %}
-                    <a class="user_icon_mini" href="{% url 'profile'%}"><img src="{{user.profile.avatar.url }}"  class="icon" title="Go to account page"></a>
+                {% if user.profile.avatar_mini.name %}
+                    <a class="user_icon_mini" href="{% url 'profile'%}"><img src="{{user.profile.avatar_mini.url }}"  class="icon" title="Go to account page"></a>
                 {% else %}
                     <a class="user_icon_mini" href="{% url 'profile'%}"><img src="{% static 'img/user.png' %}" class="icon" title="Go to account page"></a>
                 {% endif %}

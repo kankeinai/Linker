@@ -1,0 +1,31 @@
+{% load static%}
+<div class="profile_image_block">
+    <div class="wrapper_profile_image_block">
+        <div class="profile_image">
+            {% if selected_user.profile.avatar.name %}
+                <img src="{{selected_user.profile.avatar.url}}" width="100%">
+            {%else%}
+                <img src="{% static 'img/user.png' %}" class="avatar-img" width="100%">
+            {%endif%}
+            <p>Date: {{selected_user.profile.avatar_date}}</p>
+        </div>
+        <div class="comments_section" style="display: flex; justify-content:space-between;">
+            <h2 style="padding-top: 10px;">Comments</h2>
+            <p id="closer" class="event-closer" >Close</p>
+            
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function(){
+    $('.avatar-img').click(function(event){
+        $('.profile_image_block').toggleClass('active');
+        $('body').toggleClass('active lock');
+    });
+    $('#closer').click(function(event){
+        $('.profile_image_block').toggleClass('active');
+        $('body').toggleClass('active lock');
+    });
+});
+</script>

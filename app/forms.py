@@ -30,7 +30,7 @@ class RegisterForm(forms.Form):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        exclude = ['user', 'balance', 'friends', 'is_active']
+        exclude = ['user', 'balance', 'friends', 'is_active', 'avatar_mini', 'avatar_date']
         
 class EventForm(forms.ModelForm):
     class Meta:

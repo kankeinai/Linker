@@ -7,7 +7,7 @@
     <div style="width: 100%; justify-content: center; display: flex; margin-top: 30px; margin-bottom:30px">
         {%for friend in list%}
         <div style="width: 10%;">
-            <a href="{%url 'profile'%}?user={{friend.username}}" style="display: flex; justify-content: center; margin-left:5px; margin-right: 5px;" title="Go to {{friend.username}} profile"><img src="{{friend.profile.avatar.url}}"  width="100%" style="border: 1px solid rgba(236, 236, 236, 0.8)"></a> 
+            <a href="{%url 'profile'%}?user={{friend.username}}" style="display: flex; justify-content: center; margin-left:5px; margin-right: 5px;" title="Go to {{friend.username}} profile"><img src="{{friend.profile.avatar_mini.url}}"  width="100%" style="border: 1px solid rgba(236, 236, 236, 0.8)"></a> 
         </div>
         {%empty%}
         <p>No subsriptions yet :(</p>

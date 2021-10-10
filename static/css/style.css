@@ -9,8 +9,12 @@ html,body{
     height: 100%;
     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
+body{
+    transition: 0.5s;
+}
 body.active{
     background: linear-gradient( rgba(236, 236, 236, 0.8), rgba(0, 0, 0, 0.4) ), url();
+    transition: 0.5s;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -209,12 +213,11 @@ body.active{
 .event-detail{
     box-shadow: 0.4em 0.4em 5px rgba(122,122,122,0.5);
     border-radius: 7px;
-    left: 20%;
-    bottom: 15%;
-    height: 70%;
-    width: 60%;
-    top: 15%;
-    right: 20%;
+    left: 15%;
+    bottom: 10px;
+    width: 70%;
+    top: 90px;
+    right: 15%;
     display: block;
     position: fixed;
     z-index: 100;
@@ -424,6 +427,44 @@ input#id_search{
     justify-content: center;
 
 }
+
+.profile_image_block{
+    border-radius: 3px;
+    position: fixed;
+    top: 90px;
+    width: 70%;
+    left: 15%;
+    right: 15%;
+    background-color: #fff;
+    box-shadow: 0.4em 0.4em 5px rgba(122,122,122,0.5);
+    bottom: 10px;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s, visibility 0s linear 0.3s;
+}
+.profile_image_block.active{
+    opacity: 1;
+    visibility:visible;
+    transition: opacity 0.3s, visibility 0s linear 0.3s;
+
+}
+
+.profile_image{
+    padding: 20px 20px 20px 20px;
+    width: 50%;
+    height: auto;    
+}
+.comments_section{
+    padding: 10px 10px 10px 10px;
+    width: 50%;
+}
+.wrapper_profile_image_block{
+    display: flex;
+    justify-content: space-between;
+}
+
+
 @media (max-width:898px){
     input,a,p{
         font-size: 20px;

@@ -5,8 +5,8 @@
     <div class="container">
         <div style="display: flex; justify-content:center; width: 100%;">
             <div class="mobile">
-                {% if selected_user.profile.avatar.name %}
-                    <img src="{{ selected_user.profile.avatar.url }}" class="avatar-img" width="100%">
+                {% if selected_user.profile.avatar_mini.name %}
+                    <img src="{{ selected_user.profile.avatar_mini.url }}" class="avatar-img" width="100%">
                 {% else %}
                     <img src="{% static 'img/user.png' %}" class="avatar-img" width="100%">
                 {% endif %}
@@ -14,8 +14,8 @@
         </div>
         <div class="user_content">
             <div class="user_avatar">
-                {% if selected_user.profile.avatar.name %}
-                    <img src="{{ selected_user.profile.avatar.url }}" class="avatar-img" width="100%">
+                {% if selected_user.profile.avatar_mini.name %}
+                    <img src="{{ selected_user.profile.avatar_mini.url }}" class="avatar-img" width="100%">
                 {% else %}
                     <img src="{% static 'img/user.png' %}" class="avatar-img" width="100%">
                 {% endif %}
@@ -96,4 +96,5 @@
     </div>
 </div>
 {%include 'create_event.html'%}
+{% include 'profile_image.html'%}
 {% endblock %}

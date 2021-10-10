@@ -17,11 +17,16 @@ GENDER_CHOICES = [
 from django.core.files import File
 import os
 from django.utils.translation import ugettext_lazy as _
- 
-  
+
+
 class Profile(models.Model):
+    
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name=u"User")
+    
     avatar = models.ImageField(verbose_name=u"Avatar", default="user.png" , null=True, blank=True)
+    avatar_mini = models.ImageField(verbose_name=u"Avatar_mini", default="user.png" , null=True, blank=True)
+    avatar_date = models.DateField(null=True, blank=True, verbose_name=u"Image date")
+    
     bio = models.TextField(max_length=500, blank=True, null=True, verbose_name=u"About")
     city = models.CharField(max_length=30, blank=True, null=True, verbose_name=u"City")
     birth_date = models.DateField(null=True, blank=True, verbose_name=u"Birth date")
@@ -30,44 +35,50 @@ class Profile(models.Model):
     friends = models.ManyToManyField('self', blank=True)
     is_active = models.BooleanField(default=False)
     
-
     def save(self, *args, **kwargs):
-            super().save()
-            print(self.avatar.path)
-            img = Image.open(self.avatar.path)
+        super().save()
+        if self.avatar:
+            img = Image.open(self.avatar)
             img = img.convert('RGB')
-            width, height = img.size  # Get dimensions
-            if width > 600 and height > 600:
-                # keep ratio but shrink down
-                img.thumbnail((width, height))
-            # check which one is smaller
-            if height < width:
-                # make square by cutting off equal amounts left and right
-                left = (width - height) / 2
-                right = (width + height) / 2
-                top = 0
-                bottom = height
-                img = img.crop((left, top, right, bottom))
-
-            elif width < height:
-                # make square by cutting off bottom
-                left = 0
-                right = width
-                top = 0
-                bottom = width
-                img = img.crop((left, top, right, bottom))
-
-            if width > 600 and height > 600:
-                img.thumbnail((600, 600))
-                
-            os.remove(self.avatar.path)    
-            img.save(settings.MEDIA_ROOT+"/"+self.user.username+".jpg")
+            new_name = self.user.username+".jpg"
+            img.save(settings.MEDIA_ROOT+"/"+new_name, quality=75)
+            os.remove(self.avatar.path) 
+            self.avatar = new_name 
+            self.avatar_mini = self.cropper(self.user.username, self.avatar.path)
             
-            self.avatar = self.user.username+".jpg"
-        
+            self.avatar_date = timezone.now().date()
             super().save()
+        
+    def cropper(self, username, img):
+        img = Image.open(img)
+        width, height = img.size  # Get dimensions
+        if width > 600 and height > 600:
+            # keep ratio but shrink down
+            img.thumbnail((width, height))
+            # check which one is smaller
+        if height < width:
+            # make square by cutting off equal amounts left and right
+            left = (width - height) / 2
+            right = (width + height) / 2
+            top = 0
+            bottom = height
+            img = img.crop((left, top, right, bottom))
+
+        elif width < height:
+            # make square by cutting off bottom
+            left = 0
+            right = width
+            top = 0
+            bottom = width
+            img = img.crop((left, top, right, bottom))
+
+        if width > 600 and height > 600:
+            img.thumbnail((600, 600))
             
-            
+        new_name = username+"-mini.jpg"
+        img.save(settings.MEDIA_ROOT+"/"+ new_name)      
+        
+        return new_name
         
     
 class Event(models.Model):
